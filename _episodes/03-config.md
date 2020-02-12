@@ -21,14 +21,17 @@ edit /etc/hosts
 
 set the locale
 
-    Edit /etc/locale.gen and uncomment the line with en_US.UTF-8
+Edit /etc/locale.gen and uncomment the line with en_US.UTF-8
 
 Alternatively, you can run this single command without editing anything manually (Thanks to Andre for this.)
 
+~~~
 perl -pi -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
+~~~
+{: .language-bash}
 
-    Run locale-gen en_US.UTF-8
-    Run update-locale en_US.UTF-8
+Run locale-gen en_US.UTF-8
+Run update-locale en_US.UTF-8
 
 
 {% include links.md %}
