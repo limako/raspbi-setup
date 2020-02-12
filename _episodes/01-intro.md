@@ -17,4 +17,11 @@ The Raspberry Pi 4 comes in several different flavors depending on how much RAM 
 
 The Pi itself is a single board. The other necessary components include a micro-SD card, which acts as the computer's long-term storage for the operating system and associated files, and a power supply. It turns out SD cards are highly variable, so check the [Raspbian documentation for information about choosing one](https://www.raspberrypi.org/documentation/installation/sd-cards.md). Until your Pi is configured, you'll need to borrow a keyboard and a display (and a mouse might turn out to be handy). And you might want a case to keep your Pi in, so you don't accidentally damage it.
 
+Your kit may come with head-sinks or a fan. Check the documentation carefully to set up the board with the fan and heat-sinks before you assemble the kit.
+
+> ## Important:
+>
+> Be sure to wait to insert the SD card until after you have put the Raspberry Pi into the case. Otherwise, you may accidentally get the card caught and put force on the connector damaging it.
+{: .callout}
+
 {% include links.md %}

@@ -13,7 +13,11 @@ Raspbian provides [good documentation for writing an SD card](https://www.raspbe
 
 In the BCRC, we'll need to use the MacOS directions, but you can write your SD using another computer if you prefer.
 
-Go to [https://www.raspberrypi.org/downloads/raspbian/](download page) and download the "lite" version of Raspbian
+Go to [https://www.raspberrypi.org/downloads/raspbian/](download page) and download the "lite" version of Raspbian.
+
+> ## Why Lite?
+> The Desktop version of Raspbian comes with a lot of software and services you won't need for most instrumentation purposes. These take up space, consume RAM, steal computing cycles, and create more attack surfaces for your computer to get compromised. Start with a minimal image and then only add the resources you really need for a project.
+{: .callout}
 
 Insert the SD card in the slot or connect the SD card reader with the SD card inside.
 ~~~
@@ -24,11 +28,11 @@ $ diskutil list
 Identify the device number of the SD card.
 
 ~~~
-$ sudo dd bs=4m if=path_of_your_image.img of=/dev/rdiskN conv=sync
+$ sudo dd bs=4m if=path_of_your_image.img of=/dev/rdiskN
 ~~~
 {: .language-bash}
 
-Replace N with the number that you noted before. Note that you're refering to the "raw device"
+Replace N with the number that you noted before. Note that you're referring to the "raw device"
 
 This will take 5 or 10 minutes, depending on the image file size. Check the progress by pressing Ctrl+T.
 
@@ -38,20 +42,22 @@ If the command reports dd: /dev/rdiskN: Operation not permitted you need to disa
 
 If the command reports the error dd: /dev/rdisk3: Permission denied, the partition table of the SD card is being protected against being overwritten by Mac OS. Erase the SD card's partition table using this command:
 
-----
+~~~
 $ sudo diskutil partitionDisk /dev/diskN 1 MBR "Free Space" "%noformat%" 100%
-----
+~~~
 {: .language-bash}
 
 That command will also set the permissions on the device to allow writing. Now issue the dd command again.
 
 After the dd command finishes, eject the card:
 
-----
+~~~
 $ sudo diskutil eject /dev/rdiskN
-----
+~~~
 {: .language-bash}
 
-You should be able to remove the microSD card and use it to boot your Raspberry Pi.
+You should be able to remove the microSD card and use it to boot your Raspberry Pi. But first, if you put the card back into your computer, it should mount one or both partitions. The "boot" partition has a configuration file "config.txt".
+
+
 
 {% include links.md %}
