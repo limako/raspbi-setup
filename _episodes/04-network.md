@@ -39,14 +39,14 @@ network={
 ~~~
 {: .source}
 
-## Using a WPA/WPA2
+## Using WPA/WPA2
 
 Most home or public wifi networks use WPA/WPA2 for security, although the security is relatively limited. You can configure a raspberry pi to connect to these networks, if available by adding a clause to your wpa_supplicant.conf file:
 
 ~~~
 network={
- ssid="tigretejo"
- psk="freshonion776"
+ ssid="[ssid]"
+ psk="xxxxxxx"
 }
 ~~~
 {: .source}

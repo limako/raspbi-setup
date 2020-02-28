@@ -11,11 +11,6 @@ keypoints:
 - "Be productive quickly."
 ---
 
-Before you boot your Raspberry Pi for the first time, you can do some configuration in the "boot" partition of the SD card. 
-
-The Raspberry Pi has two partitions: boot and rootfs.  The "boot" partition contains the linux kernel and firmware used to boot the computer plus two configuration files: config.txt and cmdline.txt.
-
-
 When you start your Raspberry Pi for the first time, there are some things we should configure before you start working.  There is a handy-dandy script called raspi-config that can configure a lot of basic stuff. In addition, in the guide below, I'll share some of the actual commands behind the scenes that are being run. But rasp-config is a shell script (written in bash) and so you can actually look at the script to see how it works.
 
 You'll need to start raspi-config with sudo because its needs root privileges to change most configuration options.
@@ -39,29 +34,29 @@ By default, your Raspberry Pi starts up configured for use in England. We should
 
 ### Change Locale
 
-Select ""
+Select "Change Locale", scroll to "en_US.UTF-8", hit the space bar to select it, use tab to move to <Ok> and hit enter.
 
-Edit /etc/locale.gen and uncomment the line with en_US.UTF-8
+You may notice that en_GB.UTF8 is already selected. You should leave it selected.
 
-Alternatively, you can run this single command without editing anything manually (Thanks to Andre for this.)
+The next screen asks you to set the "default locale". Choose "en_US.UTF-8", use tab to move to <Ok> and hit enter.
+
+You can perform the same actions by editing /etc/locale.gen, uncommenting the line with en_US.UTF-8, and running these two commands
 
 ~~~
-perl -pi -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
+$ sudo locale-gen en_US.UTF-8
+$ sudo update-locale en_US.UTF-8
 ~~~
 {: .language-bash}
 
-Run locale-gen en_US.UTF-8
-Run update-locale en_US.UTF-8
 
-## Set the timezone
+### Set the timezone
 
+In raspi-config, select "Localisation options" then "Change Timezone". For UMass, select "US" then "Eastern."
 
+Or you can edit /etc/timezone and replace the contents with "US/Eastern".
 
 ## Set the hostname
 
-edit /etc/hostname
-edit /etc/hosts
-
-
+Use raspi-config or replaced "raspberry pi" in both /etc/hostname and /etc/hosts.
 
 {% include links.md %}
