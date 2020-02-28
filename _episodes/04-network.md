@@ -14,22 +14,41 @@ keypoints:
 ---
 We will configure your Pi to be accessible on the network and then connect to your pi securely to issue commands and exchange files.
 
+## Ethernet
+
 ## Eduroam
 
-ap_scan=0
-ctrl_interface=/var/run/wpa_supplicant
-ctrl_interface_group=0
+~~~
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=US
 network={
     ssid="eduroam"
-    scan_ssid=1
+    proto=RSN
     key_mgmt=WPA-EAP
+    pairwise=CCMP
+    auth_alg=OPEN
     eap=TTLS
-    anonymous_identity="xxxxxx@umass.edu"
+    anonymous_identity="xxxxxxxx@umass.edu"
+    # adjust the following CA line as required to match your filename
     ca_cert="/boot/eduroam.pem"
-    phase2="auth=MSCHAPV2"
-    identity="xxxxxxx@umass.edu"
-    password="xxxx"
+    phase2="auth=PAP"
+    identity="xxxxxxxx@umass.edu"
+    password="xxxxxxxx"
 }
+~~~
+{: .source}
 
+## Using a WPA/WPA2
+
+Most home or public wifi networks use WPA/WPA2 for security, although the security is relatively limited. You can configure a raspberry pi to connect to these networks, if available by adding a clause to your wpa_supplicant.conf file:
+
+~~~
+network={
+ ssid="tigretejo"
+ psk="freshonion776"
+}
+~~~
+{: .source}
 
 {% include links.md %}
