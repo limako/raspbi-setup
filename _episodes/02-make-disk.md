@@ -11,53 +11,53 @@ keypoints:
 ---
 Raspbian provides [good documentation for writing an SD card](https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
 
-In the BCRC, we'll need to use the MacOS directions, but you can write your SD using another computer if you prefer.
-
 Go to [https://www.raspberrypi.org/downloads/raspbian/](download page) and download the "lite" version of Raspbian.
 
 > ## Why Lite?
 > The Desktop version of Raspbian comes with a lot of software and services you won't need for most instrumentation purposes. These take up space, consume RAM, steal computing cycles, and create more attack surfaces for your computer to get compromised. Start with a minimal image and then only add the resources you really need for a project.
 {: .callout}
 
-Insert the SD card in the slot or connect the SD card reader with the SD card inside.
-~~~
-$ diskutil list
-~~~
-{: .language-bash}
+The Raspberry Pi foundation recommends using [Balena-Etcher](https://www.balena.io/etcher/) to write SD cards, which makes it very simple and works the same across multiple platforms.
 
-Identify the device number of the SD card.
+I've provided the Linux command-line directions below to offer commentary and demystify what happens behind the scenes.
+
+In Linux, you can use "lsblk" to see what disks the system can currently see. The "-p" flag will show the full path to the device.
 
 ~~~
-$ sudo dd bs=4m if=path_of_your_image.img of=/dev/rdiskN
+$ sudo lsblk -p
 ~~~
 {: .language-bash}
 
-Replace N with the number that you noted before. Note that you're referring to the "raw device"
+Then insert the SD card in the slot or connect the SD card reader with the SD card inside, then run lsblk again. You should easily be able to readily identify the device and number of the SD card. It might be "/dev/mmcblk0" or "/dev/sdb" depending on how you've connected the card.
 
-This will take 5 or 10 minutes, depending on the image file size. Check the progress by pressing Ctrl+T.
+If this is a new card, the computer may have automounted one or more partitions which show up underneath the entry for the device with a partition designation, e.g. "/dev/mmcblk0p1" or "/dev/sda1"
 
-If the command reports dd: bs: illegal numeric value, change the block size bs=1m to bs=1M.
-
-If the command reports dd: /dev/rdiskN: Operation not permitted you need to disable SIP before continuing.
-
-If the command reports the error dd: /dev/rdisk3: Permission denied, the partition table of the SD card is being protected against being overwritten by Mac OS. Erase the SD card's partition table using this command:
-
+You'll need to unmount (spelled "umount") all of the mounted partitions before writing to the device:
 ~~~
-$ sudo diskutil partitionDisk /dev/diskN 1 MBR "Free Space" "%noformat%" 100%
+$ sudo umount /dev/mmcblk0p1
+$ sudo umount /dev/mmcblk0p2
+
 ~~~
 {: .language-bash}
 
-That command will also set the permissions on the device to allow writing. Now issue the dd command again.
+You may need to umount more than one partition on linux. It's safe to try to umount
 
-After the dd command finishes, eject the card:
+> ## Caution!
+> Before taking the next steps, double check your typing and be absolutely certain you are referring to the correct device. Writing to the wrong device as root can damage the filesystem, data, and/org operating system of your computer.
+{: .callout}
 
 ~~~
-$ sudo diskutil eject /dev/rdiskN
+$ sudo dd bs=4m if=[path_of_your_image].img of=/dev/mmcblk0
 ~~~
 {: .language-bash}
 
-You should be able to remove the microSD card and use it to boot your Raspberry Pi. But first, if you put the card back into your computer, it should mount one or both partitions. The "boot" partition has a configuration file "config.txt".
+Before you eject the card, it's a good idea to run "sync" which makes sure all disk operations are completed.
 
+~~~
+$ sudo sync
+~~~
+{: .language-bash}
 
+You should be able to remove the microSD card and use it to boot your Raspberry Pi. But first, if you put the card back into your computer, it should mount one or both partitions and you can make some configuration changes before booting your Pi for the first time.
 
 {% include links.md %}

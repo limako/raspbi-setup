@@ -11,6 +11,11 @@ keypoints:
 - "Be productive quickly."
 ---
 
+Before you boot your Raspberry Pi for the first time, you can do some configuration in the "boot" partition of the SD card. 
+
+The Raspberry Pi has two partitions: boot and rootfs.  The "boot" partition contains the linux kernel and firmware used to boot the computer plus two configuration files: config.txt and cmdline.txt.
+
+
 When you start your Raspberry Pi for the first time, there are some things we should configure before you start working.  There is a handy-dandy script called raspi-config that can configure a lot of basic stuff. In addition, in the guide below, I'll share some of the actual commands behind the scenes that are being run. But rasp-config is a shell script (written in bash) and so you can actually look at the script to see how it works.
 
 You'll need to start raspi-config with sudo because its needs root privileges to change most configuration options.
