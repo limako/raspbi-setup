@@ -1,7 +1,7 @@
 ---
 title: "Install Media"
-teaching: 0
-exercises: 0
+teaching: 10
+exercises: 10
 questions:
 - "How do I write an SD card?"
 objectives:
@@ -28,7 +28,7 @@ $ sudo lsblk -p
 ~~~
 {: .language-bash}
 
-Then insert the SD card in the slot or connect the SD card reader with the SD card inside, then run lsblk again. You should easily be able to readily identify the device and number of the SD card. It might be "/dev/mmcblk0" or "/dev/sdb" depending on how you've connected the card.
+Then insert the SD card in the slot or connect the SD card reader with the SD card inside, then run lsblk again. You should easily be able to readily identify the device and number of the SD card. It might be "/dev/mmcblk0" or "/dev/sda" depending on how you've connected the card.
 
 If this is a new card, the computer may have automounted one or more partitions which show up underneath the entry for the device with a partition designation, e.g. "/dev/mmcblk0p1" or "/dev/sda1"
 
@@ -58,6 +58,10 @@ $ sudo sync
 ~~~
 {: .language-bash}
 
-You should be able to remove the microSD card and use it to boot your Raspberry Pi. But first, if you put the card back into your computer, it should mount one or both partitions and you can make some configuration changes before booting your Pi for the first time.
+If you remove the card and put the card back into your computer, it should mount one or both partitions and you can make some configuration changes before booting your Pi for the first time.
+
+Once you write the Raspbian image to your SD card will have two partitions: boot and rootfs.  The "boot" partition contains the linux kernel and firmware used to boot the computer plus two configuration files: config.txt and cmdline.txt. This partition is formatted using FAT32 and can be written from Macs, Windows, or Linux computers. (The "rootfs" partition is formatted using EXT4 and is generally only writable with linux).
+
+You should be able to remove the microSD card and use it to boot your Raspberry Pi.
 
 {% include links.md %}

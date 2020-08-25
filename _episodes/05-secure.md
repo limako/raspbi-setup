@@ -1,7 +1,7 @@
 ---
 title: "Secure your Pi"
-teaching: 0
-exercises: 0
+teaching: 20
+exercises: 5
 questions:
 - "How can you secure your Pi?"
 objectives:

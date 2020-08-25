@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
-teaching: 0
-exercises: 0
+teaching: 10
+exercises: 5
 questions:
 - "What are the steps to setting up a Raspberry Pi"
 objectives:
