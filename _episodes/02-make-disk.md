@@ -9,12 +9,23 @@ objectives:
 keypoints:
 - "Learn command-line utilities to write SD cards."
 ---
+> ## Important
+> Before over-writing your SD card, confirm that you were not provided 
+> with a pre-configured card as part of your course or training. These
+> directions are provided for completeness, but they might not be necessary
+> in your circumstances.
+{: .callout}
+
 Raspbian provides [good documentation for writing an SD card](https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
 
-Go to [https://www.raspberrypi.org/downloads/raspbian/](download page) and download the "lite" version of Raspbian.
+Go to [Raspberry Pi OS Download Page](https://www.raspberrypi.org/downloads/raspbian/) and download the "lite" version of Raspbian.
 
 > ## Why Lite?
-> The Desktop version of Raspbian comes with a lot of software and services you won't need for most instrumentation purposes. These take up space, consume RAM, steal computing cycles, and create more attack surfaces for your computer to get compromised. Start with a minimal image and then only add the resources you really need for a project.
+> The Desktop version of Raspbian comes with a lot of software and services 
+you won't need for most instrumentation purposes. These take up space, 
+consume RAM, steal computing cycles, and create more attack surfaces for 
+your computer to get compromised. Start with a minimal image and then only 
+add the resources you really need for a project.
 {: .callout}
 
 The Raspberry Pi foundation recommends using [Balena-Etcher](https://www.balena.io/etcher/) to write SD cards, which makes it very simple and works the same across multiple platforms.
