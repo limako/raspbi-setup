@@ -54,7 +54,18 @@ Note that updates have the potential to modify or break existing services and co
 
 ## Install a firewall
 
-A firewall only allows computers from defined addresses being able to connect. During development, your computer will probably move from place to place and have different addresses. When you set up your pi permanently, you should install a firewall to restrict who can connect.
+A firewall only allows computers from defined addresses being able to connect. During development, your computer will probably move from place to place and have different addresses. When you set up your pi permanently, you should install a firewall to restrict connects.
+
+A simple firewall you can install is "ufw". A secure posture is to allow connections only for SSH and use a tunnel if you need access to any other ports.
+
+~~~
+sudo apt install ufw
+sudo ufw allow SSH
+sudo ufw enable
+~~~
+{: .language-bash}
+
+If you forget to enable access to ssh before you turn on the firewall, you may lose the ability to connect to your pi. Under those circumstances, you may need to attach a monitor and keyboard to log in via the console to reconfigure ufw.
 
 ## Create a separate account
 
